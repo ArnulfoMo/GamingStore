@@ -12,8 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('lista_deseos', function (Blueprint $table) {
+
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('usuario_id');
+            $table->unsignedBigInteger('producto_variante_id');
+            $table->timestamp('created_at')->nullable();
+            
+            $table->foreign('usuario_id')
+                ->references('id')
+                ->on('usuarios')
+                ->restrictOnDelete();
+            $table->foreign('producto_variante_id')
+                ->references('id')
+                ->on('producto_variantes')
+                ->restrictOnDelete();
+
+            $table->unique(
+                ['usuario_id', 'producto_variante_id'],
+                'lista_deseos_usuario_producto_unique');
         });
     }
 

@@ -12,8 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('carrito_detalles', function (Blueprint $table) {
+
             $table->id();
+            $table->unsignedBigInteger('carrito_id');
+            $table->unsignedBigInteger('producto_variante_id');
+            $table->integer('cantidad');
             $table->timestamps();
+
+            $table->foreign('carrito_id')
+                ->references('id')
+                ->on('carritos')
+                ->restrictOnDelete();
+
+            $table->foreign('producto_variante_id')
+                ->references('id')
+                ->on('producto_variantes')
+                ->restrictOnDelete();
         });
     }
 
