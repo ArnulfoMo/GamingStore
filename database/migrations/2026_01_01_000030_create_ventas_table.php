@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('usuario_id')->constrained('users');
+            $table->foreignId('empleado_id')->nullable()->constrained('empleados');
             $table->foreignId('sucursal_id')->nullable()->constrained('sucursales');
             $table->foreignId('direccion_id')->nullable()->constrained('direcciones');
             $table->string('numero_orden', 50)->unique();

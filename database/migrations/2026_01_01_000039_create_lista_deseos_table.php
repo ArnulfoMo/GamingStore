@@ -20,7 +20,7 @@ return new class extends Migration
             
             $table->foreign('usuario_id')
                 ->references('id')
-                ->on('usuarios')
+                ->on('users')
                 ->restrictOnDelete();
             $table->foreign('producto_variante_id')
                 ->references('id')

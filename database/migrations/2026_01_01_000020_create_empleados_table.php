@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->constrained('users');
+            $table->foreignId('sucursal_id')->constrained('sucursales');
             $table->string('identidad',14)->unique();
             $table->string('primer_nombre',60);
-            $table->string('segund_nombre',60)->nullable();
+            $table->string('segundo_nombre',60)->nullable();
             $table->string('primer_apellido',60);
             $table->string('segund_apellido',60)->nullable();
             $table->string('cargo',80);

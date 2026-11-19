@@ -14,20 +14,21 @@ return new class extends Migration
         Schema::create('facturas', function (Blueprint $table) {
             $table->id();
             
-            $table->unsignedBigInteger('venta_id');
+            $table->unsignedBigInteger('venta_id')->unique();
             $table->unsignedBigInteger('rango_facturacion_id');
 
-            $table->string('numero_factura', 30);
+            $table->string('numero_factura', 30)->unique();
             $table->string('CAI', 50);
             $table->string('RTN_emisor', 20);
-            $table->string('RTN_cliente', 20);
+            $table->string('nombre_cliente', 150)->nullable();
+            $table->string('RTN_cliente', 20)->nullable();
             $table->decimal('subtotal', 12, 2);
             $table->decimal('descuento', 12, 2)->default(0);
             $table->decimal('tasa_isv', 5, 4);
             $table->decimal('ISV', 12, 2);
             $table->decimal('total', 12, 2);
             $table->dateTime('fecha_emision');
-            $table->integer('estado');
+            $table->integer('estado')->default(1);
 
             $table->foreign('venta_id')
                 ->references('id')
@@ -35,7 +36,7 @@ return new class extends Migration
                 ->restrictOnDelete();
             $table->foreign('rango_facturacion_id')
                 ->references('id')
-                ->on('rango_facturacion')
+                ->on('rangos_facturacion')
                 ->restrictOnDelete();
         });
     }
