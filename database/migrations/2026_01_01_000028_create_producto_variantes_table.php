@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('nombre_variante', 150)->nullable();
             $table->integer('formato');
             $table->decimal('precio', 12, 2);
-            $table->decimal('costo_referencia', 12, 2)->default(0);
             $table->date('fecha_disponibilidad')->nullable();
             $table->integer('activo')->default(1);
         });

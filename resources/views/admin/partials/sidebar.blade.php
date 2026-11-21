@@ -15,6 +15,11 @@
         ['route' => 'admin.facturas.index', 'label' => 'Facturas', 'icon' => 'bi-receipt'],
         ['route' => 'admin.reportes.index', 'label' => 'Reportes', 'icon' => 'bi-bar-chart'],
     ];
+    if (! auth()->user()?->isAdmin()) {
+        $menu = [
+            ['route' => 'operador.index', 'label' => 'Panel de operador', 'icon' => 'bi-box-seam'],
+        ];
+    }
 @endphp
 
 <aside class="left-sidebar-pro" aria-label="Menú administrativo">

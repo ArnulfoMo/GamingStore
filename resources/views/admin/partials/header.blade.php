@@ -7,7 +7,7 @@
                         <path d="M3 5h18M3 12h18M3 19h18" />
                     </svg>
                 </button>
-                <span class="admin-header-label">Panel de control <span>Gestión de la tienda</span></span>
+                <span class="admin-header-label">Panel de control <span>{{ request()->routeIs('operador.*') ? 'Operación de la tienda' : 'Gestión de la tienda' }}</span></span>
                 <div class="nk-header-right ms-auto">
                     <a href="{{ route('inicio') }}" class="btn btn-outline-light btn-sm">
                         <i class="bi bi-shop me-1" aria-hidden="true"></i> Ver tienda
