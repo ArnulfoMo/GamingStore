@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <section class="container py-5">
+    <section class="client-welcome container py-5">
 
         <h1>Bienvenido a GamingStore</h1>
 
