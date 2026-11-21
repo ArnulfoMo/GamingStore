@@ -21,9 +21,9 @@
     <nav id="sidebar">
         <div class="sidebar-header">
             <a href="{{ route('inicio') }}">
-                <img class="main-logo" src="{{ asset('cliente/images/logo.svg') }}" alt="Gaming Store">
+                <img class="main-logo" src="{{ asset('admin/img/logo/logo.svg') }}" alt="Gaming Store">
             </a>
-            <strong><i class="bi bi-controller text-white" aria-label="Gaming Store"></i></strong>
+            <strong><img src="{{ asset('admin/img/logo/favicon.svg') }}" width="36" height="36" alt="Gaming Store"></strong>
         </div>
         <div class="nalika-profile">
             <div class="profile-dtl">

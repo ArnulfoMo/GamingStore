@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#10121d">
     <title>@yield('titulo', 'Panel Administrativo') - Gaming Store</title>
 
-    <link rel="icon" href="{{ asset('admin/img/favicon.ico') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('admin/img/logo/favicon.svg') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
