@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,7 @@
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap y Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
     <!-- CSS -->
     <link href="{{ asset('cliente/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('cliente/css/gaming.css') }}" rel="stylesheet">
+    <link href="{{ asset('cliente/css/gaming.css') }}?v={{ filemtime(public_path('cliente/css/gaming.css')) }}" rel="stylesheet">
 
     @stack('styles')
 </head>
@@ -30,22 +30,6 @@
 <body class="gaming-home">
 
 <div class="scroll-progress" aria-hidden="true"></div>
-
-<!-- Barra superior -->
-<div class="topbar d-none d-md-block">
-    <div class="container d-flex justify-content-between align-items-center">
-        <span>
-            <i class="fas fa-truck-fast me-2"></i>
-            Envíos disponibles a nivel nacional · Compra de forma segura
-        </span>
-
-        <div class="topbar-links">
-            <a href="#"><i class="fas fa-headset me-1"></i>Soporte</a>
-            <a href="#"><i class="fas fa-store me-1"></i>Nosotros</a>
-            <a href="#"><i class="fas fa-user me-1"></i>Seguir pedido</a>
-        </div>
-    </div>
-</div>
 
 <!-- Navbar -->
 <header class="site-header">
