@@ -17,6 +17,30 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('administrador');
+    }
+
+    public function hasRole(...$roles): bool
+    {
+        return $this->roles()->whereIn('nombre', $roles)->exists();
+    }
+
+    public function homeRoute(): string
+    {
+        if ($this->isAdmin()) {
+            return 'admin.index';
+        }
+
+        return $this->hasRole('operador') ? 'operador.index' : 'inicio';
+    }
+
     /**
      * Get the attributes that should be cast.
      *

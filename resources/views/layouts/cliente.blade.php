@@ -53,9 +53,22 @@
                         <span class="icon-badge js-cart-count" data-count="0">0</span>
                     </a>
 
-                    <a class="icon-btn d-none d-sm-inline-flex" href="#" aria-label="Mi cuenta" title="Mi cuenta">
-                        <i class="far fa-user"></i>
-                    </a>
+                    @auth
+                        @if (auth()->user()->isAdmin())
+                            <a class="icon-btn" href="{{ route('admin.index') }}" aria-label="Administración" title="Administración"><i class="fas fa-gauge" aria-hidden="true"></i></a>
+                        @elseif (auth()->user()->hasRole('operador'))
+                            <a class="icon-btn" href="{{ route('operador.index') }}" aria-label="Panel de operador" title="Panel de operador"><i class="fas fa-boxes-stacked" aria-hidden="true"></i></a>
+                        @endif
+                        <span class="small d-none d-sm-inline">{{ auth()->user()->name }}</span>
+                        <form method="POST" action="{{ route('logout') }}" class="d-inline-flex">
+                            @csrf
+                            <button class="icon-btn" type="submit" aria-label="Cerrar sesión" title="Cerrar sesión"><i class="fas fa-right-from-bracket" aria-hidden="true"></i></button>
+                        </form>
+                    @else
+                        <a class="icon-btn" href="{{ route('login') }}" aria-label="Iniciar sesión" title="Iniciar sesión">
+                            <i class="far fa-user" aria-hidden="true"></i>
+                        </a>
+                    @endauth
 
                 </div>
 
@@ -126,6 +139,9 @@
 
 <!-- Contenido -->
 <main>
+    @if (session('success') && ! request()->routeIs('login', 'register'))
+        <div class="container pt-3"><div class="alert alert-success" role="status">{{ session('success') }}</div></div>
+    @endif
     @yield('content')
 </main>
 

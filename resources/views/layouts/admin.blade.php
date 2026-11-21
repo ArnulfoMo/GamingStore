@@ -29,7 +29,7 @@
         <main id="contenido-admin" class="container-fluid py-4">
             <div class="admin-page-heading d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
                 <div>
-                    <div class="admin-eyebrow mb-2">Gaming Store / Administración</div>
+                    <div class="admin-eyebrow mb-2">Gaming Store / {{ request()->routeIs('operador.*') ? 'Operación' : 'Administración' }}</div>
                     <h1 class="h3 text-white mb-0">@yield('page-title', 'Administración')</h1>
                 </div>
                 @yield('page-actions')
