@@ -9,7 +9,7 @@
 
     <title>@yield('title', 'Gaming Store')</title>
 
-    <link rel="icon" type="image/svg+xml" href="{{ asset('cliente/images/favicon.svg') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('cliente-assets/images/favicon.svg') }}">
 
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,8 +21,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
     <!-- CSS -->
-    <link href="{{ asset('cliente/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('cliente/css/gaming.css') }}?v={{ filemtime(public_path('cliente/css/gaming.css')) }}" rel="stylesheet">
+    <link href="{{ asset('cliente-assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('cliente-assets/css/gaming.css') }}?v={{ filemtime(public_path('cliente-assets/css/gaming.css')) }}" rel="stylesheet">
 
     @stack('styles')
 </head>
@@ -37,7 +37,7 @@
         <div class="container">
 
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('cliente/images/logo.svg') }}" alt="Gaming Store">
+                <img src="{{ asset('cliente-assets/images/logo.svg') }}" alt="Gaming Store">
             </a>
 
             <div class="d-flex align-items-center gap-1 order-lg-3">
@@ -135,7 +135,7 @@
         <div class="row g-4">
 
             <div class="col-lg-4 col-md-6">
-                <img src="{{ asset('cliente/images/logo.svg') }}"
+                <img src="{{ asset('cliente-assets/images/logo.svg') }}"
                      alt="Gaming Store"
                      style="height:48px"
                      class="mb-3">
@@ -200,7 +200,7 @@
                     </li>
                 </ul>
 
-                <img src="{{ asset('cliente/images/payments.svg') }}"
+                <img src="{{ asset('cliente-assets/images/payments.svg') }}"
                      alt="Métodos de pago aceptados"
                      style="max-width:300px;opacity:.9"
                      class="mt-2">
@@ -230,10 +230,10 @@
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{{ asset('cliente/js/data.js') }}"></script>
-<script src="{{ asset('cliente/js/main.js') }}"></script>
-<script src="{{ asset('cliente/js/home.js') }}"></script>
-<script src="{{ asset('cliente/js/gaming.js') }}"></script>
+<script src="{{ asset('cliente-assets/js/data.js') }}"></script>
+<script src="{{ asset('cliente-assets/js/main.js') }}"></script>
+<script src="{{ asset('cliente-assets/js/home.js') }}"></script>
+<script src="{{ asset('cliente-assets/js/gaming.js') }}"></script>
 
 @stack('scripts')
 

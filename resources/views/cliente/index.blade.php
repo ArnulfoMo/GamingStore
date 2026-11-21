@@ -24,6 +24,6 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('cliente/js/home.js') }}"></script>
-    <script src="{{ asset('cliente/js/gaming.js') }}"></script>
+    <script src="{{ asset('cliente-assets/js/home.js') }}"></script>
+    <script src="{{ asset('cliente-assets/js/gaming.js') }}"></script>
 @endpush

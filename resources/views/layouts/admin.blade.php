@@ -7,17 +7,17 @@
     <meta name="theme-color" content="#10121d">
     <title>@yield('titulo', 'Panel Administrativo') - Gaming Store</title>
 
-    <link rel="icon" type="image/svg+xml" href="{{ asset('admin/img/logo/favicon.svg') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('admin-assets/img/logo/favicon.svg') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="{{ asset('admin/css/nalika-icon.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/css/responsive.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/css/gaming-admin.css') }}?v={{ filemtime(public_path('admin/css/gaming-admin.css')) }}">
+    <link rel="stylesheet" href="{{ asset('admin-assets/css/nalika-icon.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-assets/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-assets/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-assets/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-assets/css/gaming-admin.css') }}?v={{ filemtime(public_path('admin-assets/css/gaming-admin.css')) }}">
     @stack('styles')
 </head>
 <body>
@@ -71,7 +71,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('admin/js/main.js') }}?v={{ filemtime(public_path('admin/js/main.js')) }}"></script>
+    <script src="{{ asset('admin-assets/js/main.js') }}?v={{ filemtime(public_path('admin-assets/js/main.js')) }}"></script>
     @stack('scripts')
 </body>
 </html>
