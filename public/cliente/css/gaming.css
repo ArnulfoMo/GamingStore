@@ -1,0 +1,44 @@
+.gaming-home { --gaming-accent: #bf94ff; }
+.gaming-hub { background: #0e0e10; color: #efeff1; padding: 42px 0 32px; }
+.gaming-heading { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:24px; }
+.gaming-kicker { color:#bf94ff; text-transform:uppercase; font-size:.72rem; font-weight:700; letter-spacing:.18em; }
+.gaming-heading h1 { color:#fff; font-size:clamp(1.8rem,4vw,3rem); margin:8px 0; }
+.gaming-heading p { color:#adadb8; margin:0; }
+.gaming-search { position:relative; width:min(100%,380px); flex-shrink:0; }
+.gaming-search input { width:100%; border:1px solid #46464f; border-radius:12px; background:#1f1f23; color:#fff; padding:15px 44px 15px 16px; }
+.gaming-search input::placeholder { color:#adadb8; }
+.gaming-search > i { position:absolute; right:17px; top:20px; color:#bf94ff; pointer-events:none; }
+.gaming-results { position:absolute; top:calc(100% + 8px); left:0; right:0; z-index:50; max-height:360px; overflow:auto; background:#18181b; border:1px solid #46464f; border-radius:12px; box-shadow:0 20px 50px #0008; }
+.gaming-results [role=option] { padding:12px 16px; cursor:pointer; border-bottom:1px solid #303035; }
+.gaming-results [aria-selected=true], .gaming-results [role=option]:hover { background:#382052; }
+.gaming-results small { display:block; color:#adadb8; }
+.gaming-results p { padding:16px; margin:0; }
+.launch-stage { position:relative; border:1px solid #ffffff20; border-radius:22px; overflow:hidden; background:#18181b; }
+.launch-slide { position:relative; min-height:490px; display:flex; align-items:end; padding:48px; isolation:isolate; }
+.launch-slide[hidden] { display:none; }
+.launch-art { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%; z-index:-2; }
+.launch-slide::after { content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,#100b1cee 0%,#100b1c9e 45%,#100b1c10 100%),linear-gradient(0deg,#0e0e10ee,transparent 80%); }
+.launch-copy { max-width:620px; }
+.launch-copy h2 { color:#fff; font-size:clamp(2.3rem,5vw,4.5rem); line-height:1.06; letter-spacing:-.05em; margin:18px 0; }
+.launch-copy p { color:#dedee3; max-width:470px; }
+.launch-badge { display:inline-flex; align-items:center; gap:8px; background:#9146ff; color:white; padding:6px 12px; border-radius:6px; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+.launch-meta { color:#dedee3; font-size:.8rem; margin:18px 0 22px; }
+.launch-actions { display:flex; gap:12px; flex-wrap:wrap; }
+.launch-actions .btn-brand { background:#9146ff; color:#fff; }
+.launch-controls { display:flex; align-items:center; gap:10px; padding:16px 24px; border-top:1px solid #ffffff16; }
+.launch-controls button { border:1px solid #46464f; background:#26262c; color:#fff; border-radius:8px; min-width:42px; min-height:42px; }
+.launch-controls button:hover { background:#772ce8; }
+.launch-dots { display:flex; gap:8px; margin-right:auto; }
+.launch-dots button { min-width:30px; width:30px; min-height:30px; border:0; background:transparent; position:relative; }
+.launch-dots button::after { content:''; position:absolute; height:4px; left:2px; right:2px; top:13px; border-radius:4px; background:#53535f; }
+.launch-dots button[aria-current=true]::after { background:#bf94ff; }
+.launch-count { color:#adadb8; font-size:.8rem; margin-right:12px; }
+.gaming-trailer { background:#0e0e10; color:#efeff1; padding:12px 0 48px; }
+.trailer-layout { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); gap:28px; align-items:center; padding:24px; border:1px solid #303035; border-radius:18px; background:#18181b; }
+.trailer-screen { aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden; }
+.trailer-screen iframe { width:100%; height:100%; border:0; }
+.trailer-copy h2 { color:#fff; margin:12px 0; font-size:clamp(1.4rem,3vw,2rem); }
+.trailer-copy p { color:#adadb8; font-size:.9rem; }
+.trailer-copy a { color:#bf94ff; }
+@media(max-width:991px) { .gaming-heading { align-items:start; flex-direction:column; } .gaming-search { width:100%; } .launch-slide { padding:32px; } }
+@media(max-width:600px) { .gaming-hub { padding-top:28px; } .launch-slide { min-height:480px; padding:26px 22px; } .launch-slide::after { background:linear-gradient(0deg,#0e0e10 0%,#100b1ccc 48%,#100b1c20 100%); } .launch-art { object-position:60% center; } .launch-copy h2 { font-size:2.7rem; } .launch-controls { padding:12px; gap:6px; } .launch-count { margin-right:4px; } .trailer-layout { grid-template-columns:1fr; padding:14px; gap:18px; } .trailer-copy { padding:6px; } }
