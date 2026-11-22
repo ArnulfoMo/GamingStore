@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PagosController;
 use App\Http\Controllers\FacturasController;
+use App\Http\Controllers\EnviosController;
 
 Route::view('/', 'cliente.index')->name('inicio');
 
@@ -28,8 +29,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/pagos/{pago}', [PagosController::class, 'show'])->name('pagos.show');
 
         Route::get('/facturas', [FacturasController::class, 'index'])->name('facturas.index');
-
         Route::get('/facturas/{factura}', [FacturasController::class, 'show'])->name('facturas.show');
+
+        Route::get('/envios', [EnviosController::class, 'index'])->name('envios.index');
+        Route::get('/envios/{envio}', [EnviosController::class, 'show'])->name('envios.show');
     });
 
     Route::middleware('role:administrador,operador')->prefix('operador')->name('operador.')->group(function () {
