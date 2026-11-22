@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('venta_id');
             
-            $table->integer('tipo_pago');
+            $table->foreignId('metodo_pago_id')->constrained('metodos_pago')->restrictOnDelete();
             $table->decimal('monto', 12, 2);
             $table->integer('estado')->default(1);
             $table->string('referencia_transaccion', 150)->nullable();

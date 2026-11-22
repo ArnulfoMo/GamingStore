@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('envios', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('venta_id');
-            $table->unsignedBigInteger('sucursal_id');
+            $table->foreignId('empresa_envio_id')->constrained('empresas_envio')->restrictOnDelete();
+            $table->unsignedBigInteger('sucursal_id')->nullable();
 
-            $table->integer('estado');
-            $table->string('numero_seguimiento', 100);
+            $table->integer('estado')->default(1);
+            $table->string('numero_seguimiento', 100)->nullable()->unique();
             $table->dateTime('fecha_despacho')->nullable();
+            $table->dateTime('fecha_entrega_estimada')->nullable();
             $table->dateTime('fecha_entrega')->nullable();
             $table->text('observaciones')->nullable();
             $table->timestamp('created_at')->nullable();
