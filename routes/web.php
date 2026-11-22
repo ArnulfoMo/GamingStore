@@ -4,6 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PagosController;
+use App\Http\Controllers\FacturasController;
+
 Route::view('/', 'cliente.index')->name('inicio');
 
 Route::middleware('guest')->group(function () {
@@ -20,6 +23,13 @@ Route::middleware('auth')->group(function () {
         Route::view('/', 'admin.index')->name('index');
         Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
         Route::patch('/usuarios/{usuario}/rol', [UsuarioController::class, 'updateRole'])->name('usuarios.rol');
+        
+        Route::get('/pagos', [PagosController::class, 'index'])->name('pagos.index');
+        Route::get('/pagos/{pago}', [PagosController::class, 'show'])->name('pagos.show');
+
+        Route::get('/facturas', [FacturasController::class, 'index'])->name('facturas.index');
+
+        Route::get('/facturas/{factura}', [FacturasController::class, 'show'])->name('facturas.show');
     });
 
     Route::middleware('role:administrador,operador')->prefix('operador')->name('operador.')->group(function () {
