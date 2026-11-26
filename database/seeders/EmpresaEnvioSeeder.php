@@ -9,9 +9,17 @@ class EmpresaEnvioSeeder extends Seeder
 {
     public function run(): void
     {
+        // Renombra las filas de demostración existentes conservando sus IDs y referencias.
+        if (DB::table('empresas_envio')->where('nombre', 'Cargo Expreso')->doesntExist()) {
+            DB::table('empresas_envio')->where('nombre', 'Cargo Express HN')->update(['nombre' => 'Cargo Expreso']);
+        }
+        if (DB::table('empresas_envio')->where('nombre', 'FedEx')->doesntExist()) {
+            DB::table('empresas_envio')->where('nombre', 'Envíos Nacionales')->update(['nombre' => 'FedEx']);
+        }
+
         foreach ([
-            ['nombre' => 'Cargo Express HN', 'telefono' => '2234-7001', 'correo' => 'soporte@cargo.test', 'sitio_web' => 'https://example.test/cargo'],
-            ['nombre' => 'Envíos Nacionales', 'telefono' => '2234-7002', 'correo' => 'ayuda@envios.test', 'sitio_web' => 'https://example.test/envios'],
+            ['nombre' => 'Cargo Expreso', 'telefono' => '22640024', 'correo' => 'soporte@cargoexpreso.hn', 'sitio_web' => 'https://www2.cargoexpreso.com/hn/'],
+            ['nombre' => 'FedEx', 'telefono' => '+504.2544.0558', 'correo' => null, 'sitio_web' => 'https://www.fedex.com/es-hn/home.html'],
             ['nombre' => 'Retiro en sucursal', 'telefono' => null, 'correo' => 'contacto@gamingstore.test', 'sitio_web' => null],
         ] as $empresa) {
             DB::table('empresas_envio')->updateOrInsert(

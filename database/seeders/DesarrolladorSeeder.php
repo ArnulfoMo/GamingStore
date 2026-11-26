@@ -15,6 +15,7 @@ class DesarrolladorSeeder extends Seeder
             'Sucker Punch Productions', 'Playground Games', '343 Industries',
             'The Coalition', 'Capcom', 'Square Enix', 'Larian Studios',
             'Avalanche Software', 'NetherRealm Studios', 'Team Cherry',
+            'Motion Twin',
         ] as $nombre) {
             DB::table('desarrolladores')->updateOrInsert(['nombre' => $nombre], []);
         }

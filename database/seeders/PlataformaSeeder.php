@@ -14,6 +14,7 @@ class PlataformaSeeder extends Seeder
             'PlayStation 4' => 'Consola de sobremesa de Sony.',
             'Xbox Series X|S' => 'Consolas de sobremesa de Microsoft, generación actual.',
             'Nintendo Switch' => 'Consola híbrida de Nintendo.',
+            'Nintendo Switch 2' => 'Consola de nueva generación de Nintendo.',
             'PC' => 'Computadora personal con sistema Windows.',
         ] as $nombre => $descripcion) {
             DB::table('plataformas')->updateOrInsert(
