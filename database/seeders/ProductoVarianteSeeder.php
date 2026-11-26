@@ -10,11 +10,6 @@ class ProductoVarianteSeeder extends Seeder
 {
     private const GTA_VI_LICENCIA_PRECIO_HNL = 2300.00;
 
-    /**
-     * Precios consultados en GameStation (HNL) o Steam (USD convertidos a HNL), por juego y plataforma.
-     * Si no se encontró el juego exacto, se usa un precio de referencia de un título
-     * de la misma plataforma publicado por la tienda.
-     */
     private const PRECIOS_HNL = [
         'The Legend of Zelda: Tears of the Kingdom' => ['Nintendo Switch' => 1390.00],
         'Super Mario Bros. Wonder' => ['Nintendo Switch' => 1200.00],
@@ -37,15 +32,10 @@ class ProductoVarianteSeeder extends Seeder
         'Hogwarts Legacy' => ['PlayStation 5' => 1100.00, 'PlayStation 4' => 990.00, 'Xbox Series X|S' => 1590.00, 'Nintendo Switch' => 1100.00],
         'Mortal Kombat 1' => ['PlayStation 5' => 990.00, 'Xbox Series X|S' => 990.00],
         'Hollow Knight' => ['PlayStation 4' => 900.00, 'Nintendo Switch' => 990.00],
-        // Precio GameStation: Dead Cells Switch L 700.
-        // Steam PC: precio regular US$24.99, convertido a L 675.98 con tasa de venta BCH L27.0499/USD.
         'Dead Cells' => ['Nintendo Switch' => 700.00, 'PC' => 675.98],
-        // No hay ficha GameStation de la nueva versión. Precio digital Nintendo US$59.99
-        // convertido a L 1,622.72 con tasa de venta BCH L27.0499/USD.
         'The Legend of Zelda: Ocarina of Time' => ['Nintendo Switch 2' => 1622.72],
     ];
 
-    /** Referencia GameStation para los títulos/plataformas que no aparecen listados. */
     private const PRECIO_REFERENCIA_HNL = [
         'PlayStation 5' => 990.00,
         'PlayStation 4' => 900.00,
@@ -102,10 +92,6 @@ class ProductoVarianteSeeder extends Seeder
             }
         }
 
-        // Precios GameStation: SSD M.2 Kingston 500 GB con precio solicitado de L 2,000;
-        // SSD SATA III 240 GB L 2,100; SSD SATA III 480 GB L 3,000;
-        // mouse Logitech PRO L 1,300; control Xbox Carbon Black L 1,490;
-        // control PS5 DualSense Negro L 1,690.
         $hardware = [
             [
                 'nombre' => 'Memoria / Disco duro SSD M2 de 500 GB Kingston',

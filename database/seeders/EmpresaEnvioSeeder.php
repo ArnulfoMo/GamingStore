@@ -9,7 +9,6 @@ class EmpresaEnvioSeeder extends Seeder
 {
     public function run(): void
     {
-        // Renombra las filas de demostración existentes conservando sus IDs y referencias.
         if (DB::table('empresas_envio')->where('nombre', 'Cargo Expreso')->doesntExist()) {
             DB::table('empresas_envio')->where('nombre', 'Cargo Express HN')->update(['nombre' => 'Cargo Expreso']);
         }
