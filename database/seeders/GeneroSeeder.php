@@ -12,6 +12,7 @@ class GeneroSeeder extends Seeder
         foreach ([
             'Acción', 'Aventura', 'RPG', 'Mundo abierto', 'Disparos', 'Plataformas',
             'Carreras', 'Deportes', 'Lucha', 'Terror', 'Estrategia', 'Familiar',
+            'Roguelike', 'Metroidvania',
         ] as $nombre) {
             DB::table('generos')->updateOrInsert(
                 ['nombre' => $nombre],

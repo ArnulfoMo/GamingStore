@@ -16,6 +16,7 @@ class CategoriaSeeder extends Seeder
             'Mandos' => 'Controles y mandos para consolas y PC.',
             'Audio gaming' => 'Auriculares y equipos de audio para jugar.',
             'Tarjetas digitales' => 'Tarjetas prepago y saldo para plataformas.',
+            'Almacenamiento' => 'Unidades SSD, memorias y dispositivos para ampliar almacenamiento.',
         ] as $nombre => $descripcion) {
             DB::table('categorias')->updateOrInsert(
                 ['nombre' => $nombre],

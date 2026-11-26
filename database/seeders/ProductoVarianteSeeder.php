@@ -11,7 +11,7 @@ class ProductoVarianteSeeder extends Seeder
     private const GTA_VI_LICENCIA_PRECIO_HNL = 2300.00;
 
     /**
-     * Precios consultados en GameStation (HNL), organizados por juego y plataforma.
+     * Precios consultados en GameStation (HNL) o Steam (USD convertidos a HNL), por juego y plataforma.
      * Si no se encontró el juego exacto, se usa un precio de referencia de un título
      * de la misma plataforma publicado por la tienda.
      */
@@ -37,6 +37,12 @@ class ProductoVarianteSeeder extends Seeder
         'Hogwarts Legacy' => ['PlayStation 5' => 1100.00, 'PlayStation 4' => 990.00, 'Xbox Series X|S' => 1590.00, 'Nintendo Switch' => 1100.00],
         'Mortal Kombat 1' => ['PlayStation 5' => 990.00, 'Xbox Series X|S' => 990.00],
         'Hollow Knight' => ['PlayStation 4' => 900.00, 'Nintendo Switch' => 990.00],
+        // Precio GameStation: Dead Cells Switch L 700.
+        // Steam PC: precio regular US$24.99, convertido a L 675.98 con tasa de venta BCH L27.0499/USD.
+        'Dead Cells' => ['Nintendo Switch' => 700.00, 'PC' => 675.98],
+        // No hay ficha GameStation de la nueva versión. Precio digital Nintendo US$59.99
+        // convertido a L 1,622.72 con tasa de venta BCH L27.0499/USD.
+        'The Legend of Zelda: Ocarina of Time' => ['Nintendo Switch 2' => 1622.72],
     ];
 
     /** Referencia GameStation para los títulos/plataformas que no aparecen listados. */
@@ -55,6 +61,7 @@ class ProductoVarianteSeeder extends Seeder
             'PlayStation 4' => [1, 'Físico'],
             'Xbox Series X|S' => [1, 'Físico'],
             'Nintendo Switch' => [1, 'Físico'],
+            'Nintendo Switch 2' => [2, 'Licencia digital'],
             'PC' => [2, 'Digital'],
         ];
 
@@ -93,6 +100,68 @@ class ProductoVarianteSeeder extends Seeder
                     ],
                 );
             }
+        }
+
+        // Precios GameStation: SSD M.2 Kingston 500 GB con precio solicitado de L 2,000;
+        // SSD SATA III 240 GB L 2,100; SSD SATA III 480 GB L 3,000;
+        // mouse Logitech PRO L 1,300; control Xbox Carbon Black L 1,490;
+        // control PS5 DualSense Negro L 1,690.
+        $hardware = [
+            [
+                'nombre' => 'Memoria / Disco duro SSD M2 de 500 GB Kingston',
+                'sku' => 'GS-SSD-M2-KINGSTON-500GB',
+                'variante' => 'SSD M.2 Kingston 500 GB',
+                'precio' => 2000.00,
+            ],
+            [
+                'nombre' => 'Memoria / Disco duro interno SSD de 240 GB Kingston',
+                'sku' => 'GS-SSD-SATA-KINGSTON-240GB',
+                'variante' => 'SSD SATA III Kingston 240 GB',
+                'precio' => 2100.00,
+            ],
+            [
+                'nombre' => 'Memoria / Disco duro interno SSD de 480 GB Kingston',
+                'sku' => 'GS-SSD-SATA-KINGSTON-480GB',
+                'variante' => 'SSD SATA III Kingston 480 GB',
+                'precio' => 3000.00,
+            ],
+            [
+                'nombre' => 'Mouse Gaming PRO Logitech',
+                'sku' => 'GS-MOUSE-GAMING-PRO-LOGITECH',
+                'variante' => 'Mouse Gaming PRO Logitech',
+                'precio' => 1300.00,
+            ],
+            [
+                'nombre' => 'XBOX Control Inalambrico Carbon Black Microsoft',
+                'sku' => 'GS-XBOX-CONTROL-CARBON-BLACK',
+                'variante' => 'Control Xbox inalámbrico Carbon Black',
+                'precio' => 1490.00,
+            ],
+            [
+                'nombre' => 'PS5 Control DualSense Negro Sony',
+                'sku' => 'GS-PS5-CONTROL-DUALSENSE-NEGRO',
+                'variante' => 'Control DualSense Negro Sony',
+                'precio' => 1690.00,
+            ],
+        ];
+
+        foreach ($hardware as $item) {
+            $productoId = DB::table('productos')->where('nombre', $item['nombre'])->value('id');
+
+            DB::table('producto_variantes')->updateOrInsert(
+                ['sku' => $item['sku']],
+                [
+                    'producto_id' => $productoId,
+                    'plataforma_id' => null,
+                    'edicion_id' => null,
+                    'codigo_barras' => null,
+                    'nombre_variante' => $item['variante'],
+                    'formato' => 1,
+                    'precio' => $item['precio'],
+                    'fecha_disponibilidad' => null,
+                    'activo' => 1,
+                ],
+            );
         }
     }
 }
