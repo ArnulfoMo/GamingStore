@@ -1,8 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ClasificacionEsrbController;
+use App\Http\Controllers\DesarrolladorController;
 use App\Http\Controllers\DireccionController;
+use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\PlataformaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +35,11 @@ Route::middleware('auth')->group(function () {
             ->only(['index', 'update'])
             ->parameters(['usuarios' => 'usuario']);
         Route::patch('/usuarios/{usuario}/estado', [UsuarioController::class, 'updateStatus'])->name('usuarios.estado');
+        Route::resource('categorias', CategoriaController::class)->parameters(['categorias' => 'categoria']);
+        Route::resource('plataformas', PlataformaController::class)->parameters(['plataformas' => 'plataforma']);
+        Route::resource('generos', GeneroController::class)->parameters(['generos' => 'genero']);
+        Route::resource('clasificaciones-esrb', ClasificacionEsrbController::class)->parameters(['clasificaciones-esrb' => 'clasificacion']);
+        Route::resource('desarrolladores', DesarrolladorController::class)->parameters(['desarrolladores' => 'desarrollador']);
     });
 
     Route::middleware('role:administrador,operador')->prefix('operador')->name('operador.')->group(function () {
