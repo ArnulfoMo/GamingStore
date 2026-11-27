@@ -10,7 +10,7 @@
         <label class="form-label" for="email">Correo electrónico</label>
         <div class="input-icon">
             <i class="fas fa-envelope" aria-hidden="true"></i>
-            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="tu@correo.com" autocomplete="username" maxlength="255" required autofocus>
+            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="tu@correo.com" autocomplete="username" maxlength="254" required autofocus>
         </div>
     </div>
     <div class="mb-3">

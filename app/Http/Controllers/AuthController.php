@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\RegistrationAvailabilityRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,7 +21,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credenciales = $request->validate([
-            'email' => ['required', 'email', 'max:255'],
+            'email' => ['required', 'email', 'max:254'],
             'password' => ['required', 'string'],
         ]);
 
@@ -40,17 +42,23 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function register(Request $request)
+    public function checkRegistrationAvailability(RegistrationAvailabilityRequest $request)
     {
-        $datos = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $datos = $request->validated();
+
+        return response()->json([
+            'available' => ! User::where($datos['field'], $datos['value'])->exists(),
+        ])->header('Cache-Control', 'no-store');
+    }
+
+    public function register(RegisterRequest $request)
+    {
+        $datos = $request->validated();
 
         $user = DB::transaction(function () use ($datos) {
             $user = User::create([
                 'name' => $datos['name'],
+                'gamertag' => $datos['gamertag'],
                 'email' => $datos['email'],
                 'password' => Hash::make($datos['password']),
             ]);

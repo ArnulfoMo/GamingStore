@@ -10,6 +10,8 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1')->name('login.post');
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register/disponibilidad', [AuthController::class, 'checkRegistrationAvailability'])
+        ->middleware('throttle:60,1,register-availability:')->name('register.disponibilidad');
     Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:5,1')->name('register.post');
 });
 
