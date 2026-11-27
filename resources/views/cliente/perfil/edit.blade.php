@@ -11,7 +11,10 @@
                     <h1 class="h3 mb-1">Mi perfil</h1>
                     <p class="text-muted mb-0">Actualiza tus datos personales y tu información de contacto.</p>
                 </div>
-                <a href="{{ route($usuario->homeRoute()) }}" class="btn btn-outline-secondary">Volver al inicio</a>
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{{ route('direcciones.index') }}" class="btn btn-outline-secondary"><i class="fas fa-location-dot me-1" aria-hidden="true"></i>Mis direcciones</a>
+                    <a href="{{ route($usuario->homeRoute()) }}" class="btn btn-outline-secondary">Volver al inicio</a>
+                </div>
             </div>
 
             @if ($errors->any())

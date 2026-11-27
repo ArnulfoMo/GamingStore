@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DireccionController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/perfil', [PerfilController::class, 'edit'])->name('perfil.edit');
     Route::patch('/perfil', [PerfilController::class, 'update'])->name('perfil.update');
+    Route::resource('direcciones', DireccionController::class)->parameters(['direcciones' => 'direccion']);
+    Route::patch('/direcciones/{direccion}/principal', [DireccionController::class, 'principal'])->name('direcciones.principal');
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::view('/', 'admin.index')->name('index');

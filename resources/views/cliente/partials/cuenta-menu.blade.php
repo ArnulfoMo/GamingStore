@@ -1,6 +1,7 @@
 @php
     $opcionesCuenta = [
         ['route' => 'perfil.edit', 'label' => 'Mi perfil', 'icon' => 'far fa-user'],
+        ['route' => 'direcciones.index', 'label' => 'Mis direcciones', 'icon' => 'fas fa-location-dot'],
         ['route' => 'pedidos.index', 'label' => 'Mis pedidos', 'icon' => 'fas fa-box'],
         ['route' => 'licencias.index', 'label' => 'Mis juegos y licencias', 'icon' => 'fas fa-key'],
         ['route' => 'facturas.index', 'label' => 'Mis facturas', 'icon' => 'fas fa-receipt'],
@@ -20,7 +21,7 @@
         @foreach ($opcionesCuenta as $opcion)
             <li>
                 @if (Route::has($opcion['route']))
-                    <a class="dropdown-item account-menu-item {{ request()->routeIs($opcion['route']) ? 'active' : '' }}" href="{{ route($opcion['route']) }}" @if (request()->routeIs($opcion['route'])) aria-current="page" @endif>
+                    <a class="dropdown-item account-menu-item {{ request()->routeIs(str_replace('.index', '.*', $opcion['route'])) ? 'active' : '' }}" href="{{ route($opcion['route']) }}" @if (request()->routeIs(str_replace('.index', '.*', $opcion['route']))) aria-current="page" @endif>
                         <i class="{{ $opcion['icon'] }}" aria-hidden="true"></i>
                         <span>{{ $opcion['label'] }}</span>
                     </a>
