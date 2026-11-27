@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\RegistrationAvailabilityRequest;
 use App\Models\Role;
@@ -18,12 +19,10 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $credenciales = $request->validate([
-            'email' => ['required', 'email', 'max:254'],
-            'password' => ['required', 'string'],
-        ]);
+        $credenciales = $request->safe()->only(['email', 'password']);
+        $credenciales['activo'] = 1;
 
         if (Auth::attempt($credenciales, $request->boolean('remember'))) {
             $request->session()->regenerate();
@@ -33,7 +32,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'El correo o la contraseña son incorrectos.',
+            'email' => 'El correo o la contraseña son incorrectos, o la cuenta está desactivada.',
         ])->onlyInput('email');
     }
 

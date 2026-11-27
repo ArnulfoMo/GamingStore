@@ -20,8 +20,10 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::view('/', 'admin.index')->name('index');
-        Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-        Route::patch('/usuarios/{usuario}/rol', [UsuarioController::class, 'updateRole'])->name('usuarios.rol');
+        Route::resource('usuarios', UsuarioController::class)
+            ->only(['index', 'update'])
+            ->parameters(['usuarios' => 'usuario']);
+        Route::patch('/usuarios/{usuario}/estado', [UsuarioController::class, 'updateStatus'])->name('usuarios.estado');
     });
 
     Route::middleware('role:administrador,operador')->prefix('operador')->name('operador.')->group(function () {

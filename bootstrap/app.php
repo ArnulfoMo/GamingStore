@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\EnsureUserHasRole;
+use App\Http\Middleware\EnsureUserIsActive;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -14,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->web(append: [EnsureUserIsActive::class]);
         $middleware->redirectGuestsTo(fn () => route('login'));
         $middleware->redirectUsersTo(fn (Request $request) => route($request->user()->homeRoute()));
         $middleware->alias([

@@ -17,6 +17,10 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $attributes = [
+        'activo' => 1,
+    ];
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
@@ -29,7 +33,7 @@ class User extends Authenticatable
 
     public function hasRole(...$roles): bool
     {
-        return $this->roles()->whereIn('nombre', $roles)->exists();
+        return $this->activo && $this->roles()->whereIn('nombre', $roles)->exists();
     }
 
     public function homeRoute(): string
@@ -49,6 +53,7 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            'activo' => 'boolean',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
