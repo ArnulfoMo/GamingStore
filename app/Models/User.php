@@ -7,19 +7,31 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'gamertag', 'email', 'password', 'telefono', 'fecha_nacimiento'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $attributes = [
+        'activo' => 1,
+    ];
 
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function direcciones(): BelongsToMany
+    {
+        return $this->belongsToMany(Direccion::class, 'usuario_direcciones', 'usuario_id', 'direccion_id')
+            ->withPivot('principal');
     }
 
     public function isAdmin(): bool
@@ -29,7 +41,7 @@ class User extends Authenticatable
 
     public function hasRole(...$roles): bool
     {
-        return $this->roles()->whereIn('nombre', $roles)->exists();
+        return $this->activo && $this->roles()->whereIn('nombre', $roles)->exists();
     }
 
     public function homeRoute(): string
@@ -49,7 +61,9 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            'activo' => 'boolean',
             'email_verified_at' => 'datetime',
+            'fecha_nacimiento' => 'date',
             'password' => 'hashed',
         ];
     }

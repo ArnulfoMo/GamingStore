@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserRoleRequest;
+use App\Http\Requests\UpdateUserStatusRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class UsuarioController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $usuarios = User::with('roles')->orderBy('name')->paginate(15);
@@ -18,15 +23,44 @@ class UsuarioController extends Controller
         return view('admin.usuarios.index', compact('usuarios', 'roles'));
     }
 
-    public function updateRole(Request $request, User $usuario)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        $datos = $request->validate([
-            'role_id' => ['required', 'integer', Rule::exists('roles', 'id')->whereIn('nombre', ['administrador', 'operador', 'cliente'])],
-        ], [
-            'role_id.required' => 'Selecciona un rol.',
-            'role_id.integer' => 'El rol seleccionado no es válido.',
-            'role_id.exists' => 'El rol seleccionado no es válido.',
-        ]);
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(User $usuario)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(User $usuario)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateUserRoleRequest $request, User $usuario)
+    {
+        $datos = $request->validated();
 
         $role = Role::findOrFail($datos['role_id']);
 
@@ -47,5 +81,43 @@ class UsuarioController extends Controller
         }
 
         return back()->with('success', 'Rol actualizado correctamente.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(User $usuario)
+    {
+        //
+    }
+
+    public function updateStatus(UpdateUserStatusRequest $request, User $usuario)
+    {
+        $activo = $request->boolean('activo');
+
+        if ($usuario->is($request->user()) && ! $activo) {
+            throw ValidationException::withMessages([
+                'activo' => 'No puedes desactivar tu propia cuenta de administrador.',
+            ]);
+        }
+
+        $usuario->activo = $activo;
+
+        if (! $activo) {
+            $usuario->setRememberToken(Str::random(60));
+        }
+
+        $usuario->save();
+
+        $mensaje = $activo ? 'Cuenta activada correctamente.' : 'Cuenta desactivada correctamente.';
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => $mensaje,
+                'activo' => $usuario->activo,
+            ]);
+        }
+
+        return back()->with('success', $mensaje);
     }
 }

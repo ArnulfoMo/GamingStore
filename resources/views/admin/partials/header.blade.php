@@ -25,6 +25,7 @@
                             @auth
                                 <li><span class="dropdown-item-text fw-bold">{{ auth()->user()->name }}</span></li>
                                 <li><span class="dropdown-item-text small">{{ auth()->user()->email }}</span></li>
+                                <li><a class="dropdown-item" href="{{ route('perfil.edit') }}"><i class="bi bi-person me-1" aria-hidden="true"></i>Mi perfil</a></li>
                                 @if (Route::has('logout'))
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
